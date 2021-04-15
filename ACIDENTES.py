@@ -5,7 +5,7 @@ from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 import pandas as pd
 
-tes = pd.read_excel(r"C:\Users\natan\OneDrive\Área de Trabalho\estados.xlsx")
+tes = pd.read_excel(r"estados.xlsx")
 dados = tes.values
 ano = dados[:,0]
 SP = dados[:,1]
@@ -44,7 +44,7 @@ valor_de_maior_menor_50 = [">50", "<50", "total"]
 
 
 
-tes = pd.read_excel(r"C:\Users\natan\OneDrive\Área de Trabalho\outros.xlsx")
+tes = pd.read_excel(r"outros.xlsx")
 dados = tes.values
 categoria_1 = dados[:,0]
 valor_1 = dados[:,1]
