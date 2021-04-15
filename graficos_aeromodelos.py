@@ -5,16 +5,27 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 
+# a função carregar_arquivo tem como argumento a variável (arquivo).
+# carregar_arquivo retorna open(), uma função do Python que abre um arquivo,
+# e devolve esse arquivo como um objeto de arquivo
+# newline='' diz ao interpretador para considerar uma strig vazia como sinal para iniciar uma nova linha.
 def carregar_arquivo(arquivo):
     return open(arquivo, newline='')
 
+# a função obter_dados tem como parâmetro (arquivo) que será um obejto de arquivo
+# atribui-se a variável leitor uma classe do módulo csv que lê cada linha
+# do arquivo csv passado por obter_dados, e agrupa em dicionários.
 def obter_dados(arquivo):
-    leitor = csv.DictReader(arquivo, delimiter = ',')
+    leitor = csv.DictReader(arquivo, delimiter = ',') 
     return leitor
 
+# arquivo_csv recebe a função carregar_arquivo e aqui é passado o nome do arquivo que vamos abrir.
+# dados recebe a função obter_dados que recebe arquivo_csv como parâmetro
+# dessa forma, os dados da tabela csv serão lidos e agrupados em dicionários.
 arquivo_csv = carregar_arquivo('database_aeromodelos.csv')
 dados = obter_dados(arquivo_csv)
 
+# para separar os dados da tabela, foram criadas listas que irão armazenar esses dados.
 modelo = []
 peso_decolagem = []
 comprimento_pista = []
@@ -28,6 +39,12 @@ comprimento_aeronave = []
 empenagem = []
 passageiros = []
 
+# utilizando o laço de repetição for, pecorre-se cada dado dentro do dicionário dados
+# e se a chave for a que queremos, adicionamos o valor dessa chava a lista correspondente, usando o método append()
+# o método append() adiciona um único elemento por vez no fim de uma lista
+# ao fazer isso, foi utiliado a função float() para transformar o conteúdo do formato string para ponto flutuante ('100000' ----> 100000.00)
+# o mesmo vale para o int()
+# lembrando que o modelo do dicionário generalizado é {chave: valor}, exemplo: {'peso_decolagem': '100000' }
 for dado in dados:
     modelo.append(dado['modelo_aeronave'])
     peso_decolagem.append(float(dado['peso_decolagem']))
@@ -42,6 +59,7 @@ for dado in dados:
     empenagem.append(float(dado['empenagem']))
     passageiros.append(int(dado['capacidade_de_passageiros']))
 
+# essas serão as opções que aparecerão na caixa seletora do filtro
 opcoes_filtro = ['Peso de decolagem (kg)',
                 'Comprimento de pista (m)',
                 'Velocidade de aproximação em nós',
@@ -54,30 +72,42 @@ opcoes_filtro = ['Peso de decolagem (kg)',
                 'Empenagem (m)',
                 'Capacidade de passageiros']
 
+# essas são as opções e os valores de uma filtragem dos dados que reúne dados dentro de uma faixa de valor
 opcoes_zomm_peso = ['Menor que 150', 'Menor que 65 mil', 'Total']
 valor_de_opcoes_zomm_peso = ['<150', '<65000', 'Total']
 
+
 app = dash.Dash(__name__)
 
+# nesse ponto, configurammos a aparência da aplicação que será executada no browser
 app.layout = html.Div([
     html.P("Categoria:"),
-    dcc.Dropdown(
-        id="categoria-dropdown",
-        options=[
-            {'label': opcao, 'value': opcao}
-            for opcao in opcoes_filtro
+    dcc.Dropdown(                               # componente do dash que cria uma caixa seletora
+        id="categoria-dropdown",                # id é um componente usado para identificar o componente dash no callback. Precisa ser único
+        options=[                               # aqui são definidos as opções da caixa seletora dentro das opções na lista opcoes_filtros
+            {'label': opcao, 'value': opcao}    
+            for opcao in opcoes_filtro          # esse laço percorre todas as opções dentro da lista opcoes_filtro
         ],
-        value = opcoes_filtro[0],
-        clearable=False,
+        value = opcoes_filtro[0],               # aqui é definido o valor que aparecerá por padrão na caixa seletora, nesse caso, o valor que será mostrado é aquele da posição 0 da lista opcoes_filtro
+        clearable=False,                        # propriedade do componente dropdown que permite limpar o valor selecionado. Determinar False impede isso.
     ),
-    dcc.RadioItems(
-        id = "categoria-2",
+    dcc.RadioItems(            # componente que cria checkboxes para filtragem de dados                 
+        id = "categoria-2",    # identificação do componente para chamada no callback                 
         options = [{'label': opcao, 'value':valor} for opcao, valor in zip(opcoes_zomm_peso, valor_de_opcoes_zomm_peso)],
         value = 'Total'
     ),
-    dcc.Graph(id="bar-chart"),
+    # zip() é uma função que uni dois valores em locais distintos em uma tupla.
+    # Ex.:
+    #   >>> a = ('Charles', 'Michael', 'Anna')
+    #   >>> b = ('June', 'Bia', 'John')
+    #   >>> x = zip(a,b)
+    #   >>> print(x)
+    #   >>> (('Charles', 'June'), ('Michael','Bia'), ('Anna','John'))
+    dcc.Graph(id="bar-chart"),  #componente usado para renderizar gráficos plotly
 ])
 
+# função responsável por filtrar dados com o auxílio de estrutura de decisão if-else
+# retorna listas com os dados filtrados
 def filtro(opcao, valor):
     valores_filtrados = []
     aeronaves_filtradas = []
@@ -120,6 +150,7 @@ def filtro(opcao, valor):
 
     return [valores_filtrados, aeronaves_filtradas]
 
+# app.callbak é um decorador, uma função que recebe parâmetros de entrada e saída e retorna uma função
 @app.callback(
     Output("bar-chart", "figure"), 
     [Input("categoria-dropdown", "value"), Input('categoria-2', 'value')]
@@ -136,6 +167,6 @@ def grafico_1(argumento, maior_menor):
     grafico = go.Figure(barras1)
 
     return grafico
-
-if __name__ == '__main__':
+# execução do código, debug=True permite ver as mensagens de erro durante a execução da aplicação;
+# use_reloader = False desativa o recarregamento do código, o carregamento do código reinicia a aplicação quandoo código é alterado.
     app.run_server(debug = True, use_reloader = False)
