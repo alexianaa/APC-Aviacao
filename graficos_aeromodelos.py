@@ -5,25 +5,14 @@ import dash_html_components as html
 from dash.dependencies import Input, Output
 import plotly.graph_objects as go
 
-# a função carregar_arquivo tem como argumento a variável (arquivo).
-# carregar_arquivo retorna open(), uma função do Python que abre um arquivo,
-# e devolve esse arquivo como um objeto de arquivo
+# open abre o arquivo e devolve a arquivo_csv como um objeto de arquivo
 # newline='' diz ao interpretador para considerar uma strig vazia como sinal para iniciar uma nova linha.
-def carregar_arquivo(arquivo):
-    return open(arquivo, newline='')
+# do arquivo csv é agrupado em dicionários.
+# em dados as informacoes da tabela csv serão lidas e agrupadas em dicionários.
+# lembrando que o modelo do dicionário generalizado é {chave: valor}, exemplo: {'peso_decolagem': '100000' }
 
-# a função obter_dados tem como parâmetro (arquivo) que será um obejto de arquivo
-# atribui-se a variável leitor uma classe do módulo csv que lê cada linha
-# do arquivo csv passado por obter_dados, e agrupa em dicionários.
-def obter_dados(arquivo):
-    leitor = csv.DictReader(arquivo, delimiter = ',') 
-    return leitor
-
-# arquivo_csv recebe a função carregar_arquivo e aqui é passado o nome do arquivo que vamos abrir.
-# dados recebe a função obter_dados que recebe arquivo_csv como parâmetro
-# dessa forma, os dados da tabela csv serão lidos e agrupados em dicionários.
-arquivo_csv = carregar_arquivo('database_aeromodelos.csv')
-dados = obter_dados(arquivo_csv)
+arquivo_csv = open('database_aeromodelos.csv', newline='')
+dados = csv.DictReader(arquivo_csv, delimiter = ',')
 
 # para separar os dados da tabela, foram criadas listas que irão armazenar esses dados.
 modelo = []
@@ -44,7 +33,7 @@ passageiros = []
 # o método append() adiciona um único elemento por vez no fim de uma lista
 # ao fazer isso, foi utiliado a função float() para transformar o conteúdo do formato string para ponto flutuante ('100000' ----> 100000.00)
 # o mesmo vale para o int()
-# lembrando que o modelo do dicionário generalizado é {chave: valor}, exemplo: {'peso_decolagem': '100000' }
+
 for dado in dados:
     modelo.append(dado['modelo_aeronave'])
     peso_decolagem.append(float(dado['peso_decolagem']))
@@ -81,7 +70,7 @@ app = dash.Dash(__name__)
 
 # nesse ponto, configurammos a aparência da aplicação que será executada no browser
 app.layout = html.Div([
-    html.P("Categoria:"),
+    html.P("Categoria:"),                       # Para o nome 'Categoria' aparecer
     dcc.Dropdown(                               # componente do dash que cria uma caixa seletora
         id="categoria-dropdown",                # id é um componente usado para identificar o componente dash no callback. Precisa ser único
         options=[                               # aqui são definidos as opções da caixa seletora dentro das opções na lista opcoes_filtros
@@ -169,4 +158,6 @@ def grafico_1(argumento, maior_menor):
     return grafico
 # execução do código, debug=True permite ver as mensagens de erro durante a execução da aplicação;
 # use_reloader = False desativa o recarregamento do código, o carregamento do código reinicia a aplicação quandoo código é alterado.
+    
+if __name__ == '__main__':
     app.run_server(debug = True, use_reloader = False)

@@ -75,4 +75,6 @@ app.layout = html.Div([
     dcc.Graph(figure = fig_decolagens),
     dcc.Graph(figure = fig_passageiros_por_decolagem)
 ])
-app.run_server(debug = True)
+
+if __name__ == '__main__':
+    app.run_server(debug = True, use_reloader = False)
