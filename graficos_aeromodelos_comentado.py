@@ -169,4 +169,5 @@ def grafico_1(argumento, maior_menor):
     return grafico
 # execução do código, debug=True permite ver as mensagens de erro durante a execução da aplicação;
 # use_reloader = False desativa o recarregamento do código, o carregamento do código reinicia a aplicação quandoo código é alterado.
+if __name__ == '__main__':
     app.run_server(debug = True, use_reloader = False)
