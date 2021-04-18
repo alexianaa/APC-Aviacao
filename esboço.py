@@ -44,7 +44,6 @@ for dado in dados:
 ################################################################## ACIDENTES AÉREOS ##################################################################
 # Leitura da base de dados de acidentes aéreos
 tes = pd.read_excel(r"estados.xlsx")
-tes = pd.read_excel(r"estados.xlsx")
 dados = tes.values
 
 # Criação de listas das Unidades Federativas e atribuição de dados às listas 
@@ -145,10 +144,6 @@ valor_de_ampliacao = ['<150', '<65000', 'Total']
 #   -> Unidades da Federação
 opcoes = ["SP", "RS", "MT", "PA", "PR", "MG", "GO", "MS", "AM", "BA", "SC", "MA", "RR", "RJ","TO", "PI", "PE", "CE", "AC", "ES", "AL", "AP", "RO", "SE", "DF", "INDEFINIDO", "PB", "RN"]
 
-#   -> ampliação de valores
-nomes_maior_menor_50 = ["Maior que 50%", "Menor que 50%", "Total"]
-valor_de_maior_menor_50 = [">50", "<50", "total"]
-
 
 ################################################################## CRIANDO GRÁFICOS ##################################################################
 # criação do gráfico de fluxo de passageiros
@@ -227,11 +222,6 @@ app.layout = html.Div([
         value = "SP",
         clearable = False
     ),
-    dcc.RadioItems( 
-        id = "RadioItems-acidentes",
-        options = [{'label': nome, 'value':valor} for nome, valor in zip(nomes_maior_menor_50, valor_de_maior_menor_50)], 
-        value = "total", 
-    ),
     dcc.Graph(id = "grafico-barras-acidentesUF"), #acidentes
     dcc.Graph(figure = fig_1), #acidentes
     dcc.Graph(figure = fig_2), #acidentes
@@ -287,9 +277,7 @@ def filtro_aeromodelos(opcao, valor):
     return [valores_filtrados, aeronaves_filtradas]
 
 # FUNÇÃO PARA FILTRAGEM DE DADOS NA CAIXA SELETORA DO GRÁFICO DE ACIDENTES AÉREOS POR ESTADO
-def filtro_acidentesUF(nome, valor):
-    porcentagens_filtradas = []
-    meses_filtrados = []
+def filtro_acidentesUF(nome):
     if nome == "SP":
         y = SP
     if nome == "RS":
@@ -346,20 +334,8 @@ def filtro_acidentesUF(nome, valor):
         y = PB
     if nome == "RN":
         y = RN
-    if valor == ">50":
-        for porcentagem, data in zip(y, ano):
-            if porcentagem >= 50:
-                porcentagens_filtradas.append(porcentagem)
-                meses_filtrados.append(data)
-    elif valor == "<50":
-        for porcentagem, data in zip(y, ano):
-            if porcentagem <= 50:
-                porcentagens_filtradas.append(porcentagem)
-                meses_filtrados.append(data)
-    elif valor == "total":
-        porcentagens_filtradas = y
-        meses_filtrados = ano
-    return [porcentagens_filtradas, meses_filtrados]
+
+    return y
 
 # CHAMANDO O DECORADOR DO GRÁFICO DE MODELOS DE AERONAVES
 @app.callback(
@@ -400,15 +376,14 @@ def grafico_aeronaves(argumento, maior_menor):
 # CHAMANDO O DECORADOR DO GRÁFICO DE ACIDENTES AÉREOS POR ESTADOS
 @app.callback(
     Output("grafico-barras-acidentesUF", "figure"),
-    Input("dropdown-acidentes", 'value'),
-    Input("RadioItems-acidentes", "value")
+    Input("dropdown-acidentes", 'value')
 )
 
 # Definindo os valores de x e y para o gráfico de Acidentes Aéros por Estado
-def grafico_1(argumento, maior_menor): 
-    dados_filtrados = filtro_acidentesUF(argumento, maior_menor) 
-    eixo_x = dados_filtrados[1]
-    eixo_y = dados_filtrados[0]
+def grafico_acidentesUF(argumento): 
+    dados_filtrados = filtro_acidentesUF(argumento) 
+    eixo_x = ano
+    eixo_y = dados_filtrados
     
     acidentesUF_bar = go.Bar( 
         x = eixo_x,
