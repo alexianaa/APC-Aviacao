@@ -90,7 +90,7 @@ valor_2 = dados[:,3]
 
 ################################################################## FLUXO DE PASSAGEIROS E DECOLAGENS ##################################################################
 # Leitura da base de dados de fluxo de passageiros
-df_passageiros = pd.read_csv('Fluxo - Passageiros.csv', quotechar='"') 
+df_passageiros = pd.read_csv('Fluxo - Passageiros.csv') 
 
 # Criação das listas de fluxo de passageiros por empresas e atribuição de dados às listas
 data = df_passageiros.values[:,0] 
@@ -101,7 +101,7 @@ avianca_passageiros = df_passageiros.values[:,4]
 passaredo_passageiros = df_passageiros.values[:,5]
 
 # Leitura da base de dados de fluxo de decolagens
-df_decolagens = pd.read_csv('Fluxo - Decolagens.csv', quotechar='"') 
+df_decolagens = pd.read_csv('Fluxo - Decolagens.csv') 
 
 # Criação das listas de fluxo de decolagens por empresas e atribuição de dados às listas
 gol_decolagens = df_decolagens.values[:,1]
@@ -111,7 +111,7 @@ avianca_decolagens = df_decolagens.values[:,4]
 passaredo_decolagens = df_decolagens.values[:,5]
 
 # Leitura da base de dados do fluxo de passageiros por decolagens
-df_passageiros_por_decolagem = pd.read_csv('Fluxo - Passageiros por Decolagem.csv', quotechar='"')
+df_passageiros_por_decolagem = pd.read_csv('Fluxo - Passageiros por Decolagem.csv')
 
 #Criação das listas de fluxo de passageiros por decolagem por empresas e atribuição de dados às listas
 gol_passageiros_por_decolagem = df_passageiros_por_decolagem.values[:,1]

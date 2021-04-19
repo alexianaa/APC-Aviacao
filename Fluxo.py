@@ -7,7 +7,7 @@ import dash
 import dash_core_components as dcc
 import dash_html_components as html
 
-df_passageiros = pd.read_csv('Fluxo - Passageiros.csv', quotechar='"') #faz referência ao csv de número de passageiros
+df_passageiros = pd.read_csv('Fluxo - Passageiros.csv') #faz referência ao csv de número de passageiros
 data = df_passageiros.values[:,0] #define a data que sera utilizada no eixo x em todos os gráficos
 #define os valores de passageiros, será utilizado no eixo y de seu respectivo gráfico
 gol_passageiros= df_passageiros.values[:,1]
@@ -28,7 +28,7 @@ fig_passageiros.update_layout(title='PASSAGEIROS',
                      xaxis_title='Mês', 
                      yaxis_title='Número de Passageiros')
 
-df_decolagens = pd.read_csv('Fluxo - Decolagens.csv', quotechar='"') #faz referência ao csv de número de decolagens
+df_decolagens = pd.read_csv('Fluxo - Decolagens.csv') #faz referência ao csv de número de decolagens
 #define os valores de decolagens, será utilizado no eixo y de seu respectivo gráfico
 gol_decolagens = df_decolagens.values[:,1]
 tam_decolagens = df_decolagens.values[:,2]
@@ -48,7 +48,7 @@ fig_decolagens.update_layout(title='DECOLAGENS',
                      xaxis_title='Mês', 
                      yaxis_title='Número de Decolagens')
 
-df_passageiros_por_decolagem = pd.read_csv('Fluxo - Passageiros por Decolagem.csv', quotechar='"') #faz referência ao csv de número de passageiros por decolagem
+df_passageiros_por_decolagem = pd.read_csv('Fluxo - Passageiros por Decolagem.csv') #faz referência ao csv de número de passageiros por decolagem
 #define os valores de decolagens, será utilizado no eixo y de seu respectivo gráfico
 gol_passageiros_por_decolagem = df_passageiros_por_decolagem.values[:,1]
 tam_passageiros_por_decolagem = df_passageiros_por_decolagem.values[:,2]
