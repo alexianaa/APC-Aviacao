@@ -48,34 +48,34 @@ dados = tes.values
 
 # Criação de listas das Unidades Federativas e atribuição de dados às listas 
 ano = dados[:,0]
-SP = dados[:,1]
-RS = dados[:,2]
-MT = dados[:,3]
-PA = dados[:,4]
-PR = dados[:,5]
-MG = dados[:,6]
-GO = dados[:,7]
-MS = dados[:,8]
-AM = dados[:,9]
-BA = dados[:,10]
-SC = dados[:,11]
-MA = dados[:,12]
-RR = dados[:,13]
-RJ = dados[:,14]
-TO = dados[:,15]
-PI = dados[:,16]
-PE = dados[:,17]
-CE = dados[:,18]
-AC = dados[:,19]
-ES = dados[:,20]
-AL = dados[:,21]
-AP = dados[:,22]
-RO = dados[:,23]
-SE = dados[:,24]
-DF = dados[:,25]
-INDEFINIDO = dados[:,26]
-PB = dados[:,27]
-RN = dados[:,28]
+sao_paulo = dados[:,1]
+rio_grande_s = dados[:,2]
+mato_grosso = dados[:,3]
+para = dados[:,4]
+parana = dados[:,5]
+minas_gerais = dados[:,6]
+goias = dados[:,7]
+mato_grosso_s = dados[:,8]
+amazonas = dados[:,9]
+bahia = dados[:,10]
+santa_catarina = dados[:,11]
+maranhao = dados[:,12]
+roraima = dados[:,13]
+rio_de_janeiro = dados[:,14]
+tocantins = dados[:,15]
+piaui = dados[:,16]
+pernambuco = dados[:,17]
+ceara = dados[:,18]
+acre = dados[:,19]
+espirito_santo = dados[:,20]
+alagoas = dados[:,21]
+amapa = dados[:,22]
+rondonia = dados[:,23]
+sergipe = dados[:,24]
+distrito_federal = dados[:,25]
+indefinido = dados[:,26]
+paraiba = dados[:,27]
+rio_grande_n = dados[:,28]
 
 # Leitura da base de dados da natureza e categoria dos acidentes
 tes = pd.read_excel(r"outros.xlsx")
@@ -253,61 +253,61 @@ def filtro_aeromodelos(opcao, valor):
 # FUNÇÃO PARA FILTRAGEM DE DADOS NA CAIXA SELETORA DO GRÁFICO DE ACIDENTES AÉREOS POR ESTADO
 def filtro_acidentesUF(nome):
     if nome == "SP":
-        y = SP
+        y = sao_paulo
     elif nome == "RS":
-        y = RS
+        y = rio_grande_s
     elif nome == "MT":
-        y = MT
+        y = mato_grosso
     elif nome == "PA":
-        y = PA
+        y = para
     elif nome == "PR":
-        y = PR
+        y = parana
     elif nome == "MG":
-        y = MG
+        y = minas_gerais
     elif nome == "GO":
-        y = GO
+        y = goias
     elif nome == "MS":
-        y = MS
+        y = mato_grosso_s
     elif nome == "AM":
-        y = AM
+        y = amazonas
     elif nome == "BA":
-        y = BA
+        y = bahia
     elif nome == "SC":
-        y = SC
+        y = santa_catarina
     elif nome == "MA":
-        y = MA
+        y = maranhao
     elif nome == "RR":
-        y = RR
+        y = roraima
     elif nome == "RJ":
-        y = RJ
+        y = rio_de_janeiro
     elif nome == "TO":
-        y = TO
+        y = tocantins
     elif nome == "PI":
-        y = PI
+        y = piaui
     elif nome == "PE":
-        y = PE
+        y = pernambuco
     elif nome == "CE":
-        y = CE
+        y = ceara
     elif nome == "AC":
-        y = AC
+        y = acre
     elif nome == "ES":
-        y = ES
+        y = espirito_santo
     elif nome == "AL":
-        y = AL
+        y = alagoas
     elif nome == "AP":
-        y = AP
+        y = amapa
     elif nome == "RO":
-        y = RO
+        y = rondonia
     elif nome == "SE":
-        y = SE
+        y = sergipe
     elif nome == "DF":
-        y = DF
+        y = distrito_federal
     elif nome == "INDEFINIDO":
-        y = INDEFINIDO
+        y = indefinido
     elif nome == "PB":
-        y = PB
+        y = paraiba
     elif nome == "RN":
-        y = RN
+        y = rio_grande_n
 
     return y
 
