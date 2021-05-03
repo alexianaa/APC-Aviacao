@@ -48,34 +48,34 @@ dados = tes.values
 
 # Criação de listas das Unidades Federativas e atribuição de dados às listas 
 ano = dados[:,0]
-SP = dados[:,1]
-RS = dados[:,2]
-MT = dados[:,3]
-PA = dados[:,4]
-PR = dados[:,5]
-MG = dados[:,6]
-GO = dados[:,7]
-MS = dados[:,8]
-AM = dados[:,9]
-BA = dados[:,10]
-SC = dados[:,11]
-MA = dados[:,12]
-RR = dados[:,13]
-RJ = dados[:,14]
-TO = dados[:,15]
-PI = dados[:,16]
-PE = dados[:,17]
-CE = dados[:,18]
-AC = dados[:,19]
-ES = dados[:,20]
-AL = dados[:,21]
-AP = dados[:,22]
-RO = dados[:,23]
-SE = dados[:,24]
-DF = dados[:,25]
-INDEFINIDO = dados[:,26]
-PB = dados[:,27]
-RN = dados[:,28]
+sp = dados[:,1]
+rs = dados[:,2]
+mt = dados[:,3]
+pa = dados[:,4]
+pr = dados[:,5]
+mg = dados[:,6]
+go = dados[:,7]
+ms = dados[:,8]
+am = dados[:,9]
+ba = dados[:,10]
+sc = dados[:,11]
+ma = dados[:,12]
+rr = dados[:,13]
+rj = dados[:,14]
+to = dados[:,15]
+pi = dados[:,16]
+pe = dados[:,17]
+ce = dados[:,18]
+ac = dados[:,19]
+es = dados[:,20]
+al = dados[:,21]
+ap = dados[:,22]
+ro = dados[:,23]
+se = dados[:,24]
+df = dados[:,25]
+indefinido = dados[:,26]
+pb = dados[:,27]
+rn = dados[:,28]
 
 # Leitura da base de dados da natureza e categoria dos acidentes
 tes = pd.read_excel(r"outros.xlsx")
@@ -279,61 +279,61 @@ def filtro_aeromodelos(opcao, valor):
 # FUNÇÃO PARA FILTRAGEM DE DADOS NA CAIXA SELETORA DO GRÁFICO DE ACIDENTES AÉREOS POR ESTADO
 def filtro_acidentesUF(nome):
     if nome == "SP":
-        y = SP
+        y = sp
     if nome == "RS":
-        y = RS
+        y = rs
     if nome == "MT":
-        y = MT
+        y = mt
     if nome == "PA":
-        y = PA
+        y = pa
     if nome == "PR":
-        y = PR
+        y = pr
     if nome == "MG":
-        y = MG
+        y = mg
     if nome == "GO":
-        y = GO
+        y = go
     if nome == "MS":
-        y = MS
+        y = ms
     if nome == "AM":
-        y = AM
+        y = am
     if nome == "BA":
-        y = BA
+        y = ba
     if nome == "SC":
-        y = SC
+        y = sc
     if nome == "MA":
-        y = MA
+        y = ma
     if nome == "RR":
-        y = RR
+        y = rr
     if nome == "RJ":
-        y = RJ
+        y = rj
     if nome == "TO":
-        y = TO
+        y = to
     if nome == "PI":
-        y = PI
+        y = pi
     if nome == "PE":
-        y = PE
+        y = pe
     if nome == "CE":
-        y = CE
+        y = ce
     if nome == "AC":
-        y = AC
+        y = ac
     if nome == "ES":
-        y = ES
+        y = es
     if nome == "AL":
-        y = AL
+        y = al
     if nome == "AP":
-        y = AP
+        y = ap
     if nome == "RO":
-        y = RO
+        y = ro
     if nome == "SE":
-        y = SE
+        y = se
     if nome == "DF":
-        y = DF
+        y = df
     if nome == "INDEFINIDO":
-        y = INDEFINIDO
+        y = indefinido
     if nome == "PB":
-        y = PB
+        y = pb
     if nome == "RN":
-        y = RN
+        y = rn
 
     return y
 
