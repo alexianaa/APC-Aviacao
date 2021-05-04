@@ -42,10 +42,10 @@ estados = [sao_paulo, rio_grande_s, mato_grosso, para, parana, minas_gerais, goi
 opcoes = ["SP", "RS", "MT", "PA", "PR", "MG", "GO", "MS", "AM", "BA", "SC", "MA", "RR", "RJ","TO", "PI", "PE", "CE", "AC", "ES", "AL", "AP", "RO", "SE", "DF", "INDEFINIDO", "PB", "RN"]
 
 def filtro_acidentesUF(nome):
-    for a,b in zip(estados,opcoes):
-        if(nome == b):
-            y = a
-    return y
+    for lista_estado,abreviacao_estado in zip(estados,opcoes):
+        if(nome == abreviacao_estado):
+            return lista_estado
+    
 
 arquivo_csv = open('database_aeromodelos.csv', newline='')
 dados = csv.DictReader(arquivo_csv, delimiter = ',')
