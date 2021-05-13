@@ -1,4 +1,3 @@
-import csv
 import dash
 import dash_core_components as dcc
 import dash_html_components as html
@@ -96,8 +95,11 @@ app.layout = html.Div([
     #geracao dos graficos: barras, pizza e pizza respectivamente
     dcc.Graph(id = "grafico-barras-acidentesUF"), 
     dcc.Graph(figure = fig_1), 
-    dcc.Graph(figure = fig_2), 
+    dcc.Graph(figure = fig_2),
 
+
+    #terceira parte do dash: grafico de fluxo...
+    html.Div('Fluxos de passageiros e decolagens', style={'color': 'grey', 'fontSize': 30}),
     #caixa seletora de fluxo de viagens
     dcc.Dropdown(                            
         id="filtro-fluxo",                

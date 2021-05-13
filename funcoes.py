@@ -121,16 +121,15 @@ def filtro_aeromodelos(opcao, valor):
     return [valores_filtrados, aeronaves_filtradas]
 
 def filtro(arquivo):
-    if arquivo in 'Fluxo de Passageiros':
+    if arquivo == 'Fluxo de Passageiros':
         arquivo_csv = "Fluxo - Passageiros.csv"
-    elif arquivo in 'Fluxo de Decolagens':
+    elif arquivo == 'Fluxo de Decolagens':
         arquivo_csv = 'Fluxo - Decolagens.csv'
-    elif arquivo in 'Fluxo de passageiros por decolagens':
+    elif arquivo == 'Fluxo de passageiros por decolagens':
         arquivo_csv = 'Fluxo - Passageiros por Decolagem.csv'
     
     definindo_dados = pd.read_csv(arquivo_csv, quotechar='"')
     data = definindo_dados.values[:,0] 
-    #print(data)
     gol= definindo_dados.values[:,1]
     tam = definindo_dados.values[:,2]
     azul = definindo_dados.values[:,3]
